@@ -28,6 +28,8 @@ class UsersList extends Component {
 function mapStateTopProps(state){
     return {users:state.users}
 }
-
-
+function loadData(store){
+   return store.dispatch(fetchUsers())
+}
+export {loadData};
 export default connect(mapStateTopProps,{fetchUsers})(UsersList)

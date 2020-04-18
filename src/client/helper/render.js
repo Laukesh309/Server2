@@ -3,13 +3,14 @@ import React from 'react'
 import {renderToString} from "react-dom/server"
 import {StaticRouter} from 'react-router-dom'
 import Routes from "../Routes"
-import Home from "../component/Home"
+//import Home from "../component/Home"
 import {Provider} from "react-redux"
+import {renderRoutes} from 'react-router-config'
 const render =(req,store)=>{
     const content = renderToString(
         <Provider store={store}>
         <StaticRouter location ={req.path} context={{}}>
-            <Routes/>
+           <div>{renderRoutes(Routes)}</div>
         </StaticRouter>
         </Provider>
     )
