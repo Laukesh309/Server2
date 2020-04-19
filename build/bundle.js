@@ -80,29 +80,29 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Home = __webpack_require__(12);
+var _HomePage = __webpack_require__(12);
 
-var _Home2 = _interopRequireDefault(_Home);
+var _HomePage2 = _interopRequireDefault(_HomePage);
 
-var _usersList = __webpack_require__(13);
+var _UserListPage = __webpack_require__(13);
 
-var _usersList2 = _interopRequireDefault(_usersList);
+var _UserListPage2 = _interopRequireDefault(_UserListPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = [{
+exports.default = [_extends({}, _HomePage2.default, {
     path: '/',
-    component: _Home2.default,
     exact: true
-}, {
-    loadData: _usersList.loadData,
-    path: "/users",
-    component: _usersList2.default
-}];
+}), _extends({}, _UserListPage2.default, {
+    path: "/users"
+
+})];
 
 /***/ }),
 /* 2 */
@@ -247,7 +247,7 @@ module.exports = require("express");
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+   value: true
 });
 
 var _react = __webpack_require__(0);
@@ -264,28 +264,31 @@ var _Routes2 = _interopRequireDefault(_Routes);
 
 var _reactRedux = __webpack_require__(2);
 
+var _serializeJavascript = __webpack_require__(19);
+
+var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
+
 var _reactRouterConfig = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import Home from "../component/Home"
 var render = function render(req, store) {
-    var content = (0, _server.renderToString)(_react2.default.createElement(
-        _reactRedux.Provider,
-        { store: store },
-        _react2.default.createElement(
-            _reactRouterDom.StaticRouter,
-            { location: req.path, context: {} },
-            _react2.default.createElement(
-                'div',
-                null,
-                (0, _reactRouterConfig.renderRoutes)(_Routes2.default)
-            )
-        )
-    ));
-    return '<html>\n                 <head>\n                  </head>\n                 <body>\n                <div id ="root">' + content + '</div>\n                <script src ="bundle.js"></script>\n                </body>\n               </html>';
+   var content = (0, _server.renderToString)(_react2.default.createElement(
+      _reactRedux.Provider,
+      { store: store },
+      _react2.default.createElement(
+         _reactRouterDom.StaticRouter,
+         { location: req.path, context: {} },
+         _react2.default.createElement(
+            'div',
+            null,
+            (0, _reactRouterConfig.renderRoutes)(_Routes2.default)
+         )
+      )
+   ));
+   return '<html>\n                  <head>\n                  </head>\n                  <body>\n                     <div id ="root">' + content + '</div>\n                     <script>\n                      window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\n                     </script>\n                     <script src ="bundle.js"></script>\n                  </body>\n                </html>';
 };
-
+//import Home from "../component/Home"
 exports.default = render;
 
 /***/ }),
@@ -335,7 +338,9 @@ var Home = function Home() {
         )
     );
 };
-exports.default = Home;
+exports.default = {
+    component: Home
+};
 
 /***/ }),
 /* 13 */
@@ -347,7 +352,6 @@ exports.default = Home;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.loadData = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -417,8 +421,10 @@ function mapStateTopProps(state) {
 function loadData(store) {
     return store.dispatch((0, _index.fetchUsers)());
 }
-exports.loadData = loadData;
-exports.default = (0, _reactRedux.connect)(mapStateTopProps, { fetchUsers: _index.fetchUsers })(UsersList);
+exports.default = {
+    loadData: loadData,
+    component: (0, _reactRedux.connect)(mapStateTopProps, { fetchUsers: _index.fetchUsers })(UsersList)
+};
 
 /***/ }),
 /* 14 */
@@ -507,6 +513,12 @@ exports.default = function () {
             return state;
     }
 };
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports) {
+
+module.exports = require("serialize-javascript");
 
 /***/ })
 /******/ ]);

@@ -5,6 +5,7 @@ import {StaticRouter} from 'react-router-dom'
 import Routes from "../Routes"
 //import Home from "../component/Home"
 import {Provider} from "react-redux"
+import serialize from "serialize-javascript"
 import {renderRoutes} from 'react-router-config'
 const render =(req,store)=>{
     const content = renderToString(
@@ -14,14 +15,17 @@ const render =(req,store)=>{
         </StaticRouter>
         </Provider>
     )
-             return `<html>
-                 <head>
+          return `<html>
+                  <head>
                   </head>
-                 <body>
-                <div id ="root">${content}</div>
-                <script src ="bundle.js"></script>
-                </body>
-               </html>`
+                  <body>
+                     <div id ="root">${content}</div>
+                     <script>
+                      window.INITIAL_STATE = ${serialize(store.getState())}
+                     </script>
+                     <script src ="bundle.js"></script>
+                  </body>
+                </html>`
 }
 
 export default render
