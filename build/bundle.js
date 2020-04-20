@@ -165,16 +165,22 @@ var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-router-config");
+module.exports = require("react-redux");
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-router-dom");
+module.exports = require("react-router-config");
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-dom");
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -215,12 +221,6 @@ exports.default = [_extends({}, _app2.default, {
 })];
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-redux");
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
@@ -249,13 +249,13 @@ var _render = __webpack_require__(11);
 
 var _render2 = _interopRequireDefault(_render);
 
-var _reactRouterConfig = __webpack_require__(2);
+var _reactRouterConfig = __webpack_require__(3);
 
 var _expressHttpProxy = __webpack_require__(18);
 
 var _expressHttpProxy2 = _interopRequireDefault(_expressHttpProxy);
 
-var _Routes = __webpack_require__(4);
+var _Routes = __webpack_require__(5);
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
@@ -322,19 +322,19 @@ var _react2 = _interopRequireDefault(_react);
 
 var _server = __webpack_require__(12);
 
-var _reactRouterDom = __webpack_require__(3);
+var _reactRouterDom = __webpack_require__(4);
 
-var _Routes = __webpack_require__(4);
+var _Routes = __webpack_require__(5);
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(2);
 
 var _serializeJavascript = __webpack_require__(17);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
-var _reactRouterConfig = __webpack_require__(2);
+var _reactRouterConfig = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -352,7 +352,7 @@ var render = function render(req, store) {
          )
       )
    ));
-   return '<html>\n                  <head>\n                  </head>\n                  <body>\n                     <div id ="root">' + content + '</div>\n                     <script>\n                      window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\n                     </script>\n                     <script src ="bundle.js"></script>\n                  </body>\n                </html>';
+   return '<html>\n                  <head>\n                  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">\n\n                  </head>\n                  <body>\n                     <div id ="root">' + content + '</div>\n                     <script>\n                      window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\n                     </script>\n                     <script src ="bundle.js"></script>\n                  </body>\n                </html>';
 };
 //import Home from "../component/Home"
 exports.default = render;
@@ -419,7 +419,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(2);
 
 var _index = __webpack_require__(1);
 
@@ -501,7 +501,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterConfig = __webpack_require__(2);
+var _reactRouterConfig = __webpack_require__(3);
 
 var _header = __webpack_require__(16);
 
@@ -544,9 +544,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(3);
+var _reactRouterDom = __webpack_require__(4);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -566,27 +566,31 @@ var Header = function Header(_ref) {
     );
 
     return _react2.default.createElement(
-        'div',
+        'nav',
         null,
         _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
-            'React SSR'
-        ),
-        _react2.default.createElement(
             'div',
-            null,
+            { className: 'nav-wrapper' },
             _react2.default.createElement(
                 _reactRouterDom.Link,
-                { to: '/users' },
-                'Users'
+                { to: '/', className: 'brand-logo' },
+                'React SSR'
             ),
             _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/admins' },
-                'admins'
-            ),
-            authButton
+                'div',
+                null,
+                _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/users' },
+                    'Users'
+                ),
+                _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/admins' },
+                    'admins'
+                ),
+                authButton
+            )
         )
     );
 };

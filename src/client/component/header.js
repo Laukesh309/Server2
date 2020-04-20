@@ -1,12 +1,14 @@
-import React from 'react'
+ import React from 'react'
 
 
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux'
+ import {Link} from 'react-router-dom';
 
-const Header = ({auth})=>{
+ import {connect} from 'react-redux'
+
+
+ const Header = ({auth})=>{
     console.log('My auth status is',auth)
-
+     
     const authButton = auth ? (
         <a href ='/api/logout'>Logout</a>
     ):(
@@ -14,14 +16,16 @@ const Header = ({auth})=>{
     )
 
     return (
-        <div>
-            <Link to ='/'>React SSR</Link>
-            <div>
-                <Link to ='/users'>Users</Link>
-                <Link to ='/admins'>admins</Link>
-                {authButton}
+        <nav>
+            <div className="nav-wrapper">
+                <Link to ='/' className="brand-logo">React SSR</Link>
+               <div>
+                   <Link to ='/users'>Users</Link>
+                    <Link to ='/admins'>admins</Link>
+                   {authButton}
+                </div>
             </div>
-        </div>
+        </nav>
     )
 }
 

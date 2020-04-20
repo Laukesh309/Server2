@@ -11,7 +11,6 @@ import {renderRoutes} from "react-router-config"
 import axios from 'axios'
 
 
-
 const axiosInstance = axios.create({
     baseURL:'/api'
 })
@@ -22,10 +21,16 @@ const store = createStore(
 
 ReactDOM.hydrate(
     <Provider store={store}>
-       <BrowserRouter>
+       
+
+<BrowserRouter>
          <div>
              {renderRoutes(Routes)}
          </div>
     </BrowserRouter>
     </Provider>
 ,document.getElementById("root"))
+
+
+
+
